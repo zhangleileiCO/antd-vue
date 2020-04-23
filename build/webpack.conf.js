@@ -25,6 +25,21 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules|build)/,
                 use: {loader: "babel-loader", options: {presets: ['@babel/preset-env']}}
+            },
+            {
+                test: /\.sass$/,
+                use: [
+                    "style-loader", // 将 JS 字符串生成为 style 节点
+                    "css-loader", // 将 CSS 转化成 CommonJS 模块
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                indentedSyntax: true
+                            }
+                        }
+                    },
+                ]
             }
         ]
     },

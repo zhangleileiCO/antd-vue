@@ -1,5 +1,6 @@
 <template>
-    <button :type="htmlType" :class="['btn', sizeClassName, typeClassName]" @click="click">
+    <button :type="htmlType" :class="['btn', sizeClassName, typeClassName, block ? 'btn-block': '', ghost ? 'btn-ghost' : '' ,
+    disabled? 'btn-disable' : '', shapeClassName]" @click="click">
         <slot></slot>
     </button>
 </template>
@@ -23,9 +24,16 @@
                 }
             },
             danger: false,
-            ghost: false,
-            disabled: false,
+            ghost: {
+                type: Boolean
+            },
+            disabled: {
+                type: Boolean
+            },
             loading: false,
+            block: {
+                type: Boolean
+            },
             shape: {
                 type: String,
                 validator: (value) => {
@@ -43,22 +51,29 @@
         computed: {
             sizeClassName(){
                 if(this.size === 'large'){
-                    return 'size-large'
+                    return 'btn-size-large'
                 } else if (this.size === 'small') {
-                    return 'size-small'
+                    return 'btn-size-small'
                 } else {
-                    return 'size-default'
+                    return 'btn-size-default'
                 }
             },
             typeClassName() {
                 if(this.type === 'primary'){
-                    return 'type-primary'
+                    return 'btn-type-primary'
                 } else if (this.type === 'dashed') {
-                    return 'type-dashed'
+                    return 'btn-type-dashed'
                 } else if (this.type === 'link') {
-                    return 'type-link'
+                    return 'btn-type-link'
                 } else {
-                    return 'type-default'
+                    return 'btn-type-default'
+                }
+            },
+            shapeClassName() {
+                if(this.shape === 'circle') {
+                    return 'btn-shape-circle'
+                } else if (this.shape === 'round'){
+                    return 'btn-shape-round'
                 }
             }
         },
@@ -79,43 +94,68 @@
         font-size: 13px
         margin: 0
         cursor: pointer
-    .size-large
+    .btn-size-large
         padding: 7px 15px
         font-size: 16px
-    .size-default
+    .btn-size-default
         padding: 4px 15px
         font-size: 14px
-    .size-small
+    .btn-size-small
         padding: 0 7px
         font-size: 14px
-    .type-primary
+    .btn-type-primary
         background-color: $primary-color
         transition: .2s
         color: white
-    .type-primary:hover
-        background-color: $primary-color-lt10
-    .type-default
+        &:hover
+            background-color: $primary-color-lt10
+    .btn-type-default
         background-color: white
         border: #333 solid 1px
         color: #333
         transition: .2s
-    .type-default:hover
-        border-color: $primary-color
-        color: $primary-color
-    .type-dashed
+        &:hover
+            border-color: $primary-color
+            color: $primary-color
+    .btn-type-dashed
         background-color: white
         border: #333 dashed 1px
         color: #333
         transition: .2s
-    .type-dashed:hover
-        border-color: $primary-color
-        color: $primary-color
-    .type-link
+        &:hover
+            border-color: $primary-color
+            color: $primary-color
+    .btn-type-link
         background-color: white
         border: none
         color: $primary-color
         transition: .2s
-    .type-link:hover
-        color: $primary-color-lt10
+        &:hover
+            color: $primary-color-lt10
+    .btn-block
+        display: block
+        width: 100%
 
+    .btn-ghost.btn-type-primary
+        background-color: transparent
+        color: $primary-color
+        border: $primary-color solid 1px
+        border-radius: 2px
+        &:hover
+            background-color: transparent
+            color: $primary-color-lt10
+    .btn-disable.btn-type-primary
+        cursor: not-allowed
+        color: #BEC8C8
+        background-color: #f5f5f5
+        border: #BEC8C8 solid 1px
+    .btn-shape-circle
+        height: 32px
+        padding: 0
+        line-height: 32px
+        width: 32px
+        border-radius: 50%
+        text-align: center
+    .btn-shape-round
+        border-radius: 50%
 </style>

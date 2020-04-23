@@ -9,7 +9,7 @@ module.exports = {
         app: './examples/index.js'
     },
     output: {
-        path: path.resolve(process.cwd(), './example/dist'),
+        path: path.resolve(process.cwd(), './examples/dist'),
         filename: "[name][hash:7].js"
     },
     devtool: 'source-map',
@@ -27,6 +27,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules|build)/,
                 use: {loader: "babel-loader", options: {presets: ['@babel/preset-env']}}
+            },
+            {
+                test:/\.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     },

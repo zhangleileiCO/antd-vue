@@ -37,6 +37,8 @@
             <Button shape="circle">A</Button>
             <Button shape="round">A</Button>
         </div>
+
+        <Icon name="AccountBookFilled"/>
     </div>
 </template>
 

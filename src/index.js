@@ -1,6 +1,7 @@
 import Button from '../packages/button/index'
+import Icon from '../packages/icon/index'
 
-const components = [Button]
+const components = [Button, Icon]
 
 const install = (Vue , opts = {}) => {
     components.forEach(component => {
